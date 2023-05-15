@@ -1,0 +1,63 @@
+React JS is a popular JavaScript library for building user interfaces. It allows developers to create reusable UI components and manage the state of these components in an efficient way. The following are some of the key concepts that you should know when working with React JS:
+
+Components: A component is a reusable piece of UI that can be composed together with other components to build more complex interfaces. In React, components can be created using either function components or class components.
+
+Props: Props (short for "properties") are used to pass data from a parent component to a child component. Props are read-only, meaning that they cannot be modified by the child component.
+
+State: State is used to manage data that can change over time within a component. Unlike props, state can be modified by the component itself.
+
+Lifecycle methods: React components have a set of lifecycle methods that can be used to perform certain actions at specific points during the component's lifecycle. For example, the componentDidMount method is called immediately after a component is mounted to the DOM.
+
+JSX: JSX is a syntax extension for JavaScript that allows developers to write HTML-like syntax in their JavaScript code. JSX is used in React to define the structure and content of components.
+
+Virtual DOM: React uses a virtual DOM to optimize the rendering of components. The virtual DOM is a lightweight representation of the actual DOM, and React uses it to minimize the number of changes that need to be made to the DOM when a component's state or props change.
+
+Here's an example of a simple React component that uses state:
+
+
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  function handleIncrement() {
+    setCount(count + 1);
+  }
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={handleIncrement}>Increment</button>
+    </div>
+  );
+}
+
+export default Counter;
+
+In this example, we define a Counter component that uses the useState hook to manage a count state variable. 
+When the "Increment" button is clicked,the handleIncrement function is called, which updates the count state variable using the setCount function. 
+The current value of count is displayed in the UI using JSX.
+
+To reuse a React component, you can simply import it into another component and use it like any other HTML element.
+
+Here's an example of how you could reuse the Counter component from the previous example:
+
+
+import React from 'react';
+import Counter from './Counter';
+
+function App() {
+  return (
+    <div>
+      <h1>My App</h1>
+      <Counter />
+    </div>
+  );
+}
+
+export default App;
+In this example, we import the Counter component and use it within the App component's render function. When the App component is rendered, it will display the Counter component as a child element.
+
+You can reuse the Counter component as many times as you like within your application. For example, you could use it in multiple places in your App component or even in other components.
+
+By creating reusable components like this, you can keep your code organized and reduce duplication of code across your application.
