@@ -1,61 +1,62 @@
 import React, { useState } from 'react';
-
+import "./Todo.css"
 const TodoList = () => {
-  const [todos, setTodos] = useState([]);
-  const [inputText, setInputText] = useState('');
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState('');
+  const [filter, setFilter] = useState('all');
 
-  const handleInputChange = (e) => {
-    setInputText(e.target.value);
+  const handleInputChange = (event) => {
+    setNewTask(event.target.value);
   };
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    if (inputText.trim() === '') {
-      return;
+  const handleAddTask = () => {
+    if (newTask.trim() !== '') {
+      setTasks([...tasks, { text: newTask, completed: false }]);
+      setNewTask('');
     }
-    const newTodo = {
-      id: Date.now(),
-      title: inputText,
-      completed: false,
-    };
-    setTodos([...todos, newTodo]);
-    setInputText('');
   };
 
-  const handleCheckboxChange = (id) => {
-    const updatedTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        return {
-          ...todo,
-          completed: !todo.completed,
-        };
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
+  const handleDeleteTask = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks.splice(index, 1);
+    setTasks(updatedTasks);
   };
 
-  const handleRemoveTodo = (id) => {
-    const updatedTodos = todos.filter((todo) => todo.id !== id);
-    setTodos(updatedTodos);
+  const handleTaskCompletion = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks[index].completed = !updatedTasks[index].completed;
+    setTasks(updatedTasks);
   };
+
+  const handleFilterChange = (event) => {
+    setFilter(event.target.value);
+  };
+
+  const filteredTasks = filter === 'completed'
+    ? tasks.filter(task => task.completed)
+    : filter === 'active'
+      ? tasks.filter(task => !task.completed)
+      : tasks;
 
   return (
     <div>
-      <form onSubmit={handleFormSubmit}>
-        <input type="text" value={inputText} onChange={handleInputChange} placeholder="Enter a todo item" />
-        <button type="submit">Add</button>
-      </form>
+      <h1>Todo List</h1>
+      <div>
+        <input type="text" value={newTask} onChange={handleInputChange} placeholder="Enter a task" />
+        <button onClick={handleAddTask}>Add Task</button>
+      </div>
+      <div>
+        <select value={filter} onChange={handleFilterChange}>
+          <option value="all">All</option>
+          <option value="completed">Completed</option>
+          <option value="active">Active</option>
+        </select>
+      </div>
       <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => handleCheckboxChange(todo.id)}
-            />
-            <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>{todo.title}</span>
-            <button onClick={() => handleRemoveTodo(todo.id)}>Remove</button>
+        {filteredTasks.map((task, index) => (
+          <li key={index} className={task.completed ? 'completed' : ''}>
+            <span onClick={() => handleTaskCompletion(index)}>{task.text}</span>
+            <button onClick={() => handleDeleteTask(index)}>Delete</button>
           </li>
         ))}
       </ul>
