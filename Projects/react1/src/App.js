@@ -11,6 +11,9 @@ import ProgressBarRep from './ProgressBarRep';
 import SearchBar from './WordRecommender';
 import Cricket from './Cricket';
 import Sudoku from './Sudoku';
+import TodoList1 from './Todo1';
+import MultiStepForm from './MultiStep';
+import CurrencyConverter from './CurrencyConvertor';
 function App() {
     return (
       <div>
@@ -23,7 +26,10 @@ function App() {
         {/* <ProgressBarHandler/> */}
         {/* <ProgressBarRep/> */}
         {/* <Cricket/> */}
-        <Sudoku/>
+        {/* <Sudoku/> */}
+        <TodoList1/>
+        <MultiStepForm/>
+        <CurrencyConverter/>
       </div>
     );
 }
