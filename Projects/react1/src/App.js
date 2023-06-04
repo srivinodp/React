@@ -14,6 +14,9 @@ import Sudoku from './Sudoku';
 import TodoList1 from './Todo1';
 import MultiStepForm from './MultiStep';
 import CurrencyConverter from './CurrencyConvertor';
+import BmiInterface from './BMI';
+import Interface from './BMI2';
+import ContentCard from './ContentCard';
 function App() {
     return (
       <div>
@@ -27,9 +30,12 @@ function App() {
         {/* <ProgressBarRep/> */}
         {/* <Cricket/> */}
         {/* <Sudoku/> */}
-        <TodoList1/>
+        {/* <TodoList1/>
         <MultiStepForm/>
         <CurrencyConverter/>
+         */}
+         {/* <Interface/> */}
+         <ContentCard/>
       </div>
     );
 }
